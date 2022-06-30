@@ -9,46 +9,92 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            var table = jQuery('.empleados-table').DataTable({
-                serveside:true,
-                processing:true,
-                ajax:"{{route('empleados.index')}}",
-                columns:[
-                    {data:'id', name:'id'},
-                    {data:'nombre', name:'nombre'},
-                    {data:'email', name:'email'},
-                    {data:'sexo', name:'sexo'},
-                    {data:'area_id', name:'area'},
-                    {data:'boletin', name:'boletin'},
-                    {data:'modificar', name:'modificar'},
-                    {data:'eliminar', name:'eliminar'}
-                ],
-                responsive: true,
-                "language": {
-                    "decimal":        "",
-                    "emptyTable":     "No hay datos",
-                    "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                    "infoEmpty":      "Mostrando 0 a 0 de 0 registros",
-                    "infoFiltered":   "(Filtrando de _MAX_ total de registros)",
-                    "infoPostFix":    "",
-                    "thousands":      ",",
-                    "lengthMenu":     "Mostrar _MENU_ registros",
-                    "loadingRecords": "Cargando...",
-                    "processing":     "Procesando...",
-                    "search":         "Buscar:",
-                    "zeroRecords":    "No se encontratron registros",
-                    "paginate": {
-                        "first":      "Primero",
-                        "last":       "Ultimo",
-                        "next":       "Siguiente",
-                        "previous":   "Anterior"
-                    },
-                    "aria": {
-                    "sortAscending":  ": activar para ordenar la columna ascendente",
-                    "sortDescending": ": activar para ordenar la columna descendente"
+            var tablaEmpleados = jQuery('.empleados-table')
+            var tablaProductos = jQuery('.productos-table')
+            console.log(tablaEmpleados.length)
+            console.log(tablaProductos.length)
+            if(tablaEmpleados.length){
+                var table = jQuery('.empleados-table').DataTable({
+                    serveside:true,
+                    processing:true,
+                    ajax:"{{route('empleados.index')}}",
+                    columns:[
+                        {data:'id', name:'id'},
+                        {data:'nombre', name:'nombre'},
+                        {data:'email', name:'email'},
+                        {data:'sexo', name:'sexo'},
+                        {data:'area_id', name:'area'},
+                        {data:'boletin', name:'boletin'},
+                        {data:'modificar', name:'modificar'},
+                        {data:'eliminar', name:'eliminar'}
+                    ],
+                    responsive: true,
+                    "language": {
+                        "decimal":        "",
+                        "emptyTable":     "No hay datos",
+                        "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                        "infoEmpty":      "Mostrando 0 a 0 de 0 registros",
+                        "infoFiltered":   "(Filtrando de _MAX_ total de registros)",
+                        "infoPostFix":    "",
+                        "thousands":      ",",
+                        "lengthMenu":     "Mostrar _MENU_ registros",
+                        "loadingRecords": "Cargando...",
+                        "processing":     "Procesando...",
+                        "search":         "Buscar:",
+                        "zeroRecords":    "No se encontratron registros",
+                        "paginate": {
+                            "first":      "Primero",
+                            "last":       "Ultimo",
+                            "next":       "Siguiente",
+                            "previous":   "Anterior"
+                        },
+                        "aria": {
+                        "sortAscending":  ": activar para ordenar la columna ascendente",
+                        "sortDescending": ": activar para ordenar la columna descendente"
+                        }
                     }
-                }
-            });
+                });
+            } else if(tablaProductos.length){
+                var table = jQuery('.productos-table').DataTable({
+                    serveside:true,
+                    processing:true,
+                    ajax:"{{route('productos.index')}}",
+                    columns:[
+                        {data:'id', name:'id'},
+                        {data:'nombre', name:'nombre'},
+                        {data:'descripcion', name:'descripcion'},
+                        {data:'precio', name:'precio'},
+                        {data:'modificar', name:'modificar'},
+                        {data:'eliminar', name:'eliminar'}
+                    ],
+                    responsive: true,
+                    "language": {
+                        "decimal":        "",
+                        "emptyTable":     "No hay datos",
+                        "info":           "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                        "infoEmpty":      "Mostrando 0 a 0 de 0 registros",
+                        "infoFiltered":   "(Filtrando de _MAX_ total de registros)",
+                        "infoPostFix":    "",
+                        "thousands":      ",",
+                        "lengthMenu":     "Mostrar _MENU_ registros",
+                        "loadingRecords": "Cargando...",
+                        "processing":     "Procesando...",
+                        "search":         "Buscar:",
+                        "zeroRecords":    "No se encontratron registros",
+                        "paginate": {
+                            "first":      "Primero",
+                            "last":       "Ultimo",
+                            "next":       "Siguiente",
+                            "previous":   "Anterior"
+                        },
+                        "aria": {
+                        "sortAscending":  ": activar para ordenar la columna ascendente",
+                        "sortDescending": ": activar para ordenar la columna descendente"
+                        }
+                    }
+                });
+            }
+            
             $('#createEmpleado').click(function(){
                 $('#id').val();
                 $('#empleadoForm').trigger("reset");

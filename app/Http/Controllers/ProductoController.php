@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Empleado;
-use App\Models\EmpleadoRol;
-use App\Models\Areas;
-use App\Models\Roles;
+use App\Models\Producto;
+
 use DataTables;
 
-class EmpleadoController extends Controller
+class ProductoController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -18,6 +16,7 @@ class EmpleadoController extends Controller
      */
     public function __construct()
     {
+        // 
         $this->middleware('auth');
     }
     
@@ -28,24 +27,12 @@ class EmpleadoController extends Controller
      */
     public function index(Request $request)
     {
-        $roles = Roles::get();
-        $areas = Areas::pluck('nombre','id')->all();
-        $areasAll = Areas::get();
-        $empleados = Empleado::get();
+
+        $productos = Producto::get();
         
         if($request->ajax()){
-            $allData = DataTables::of($empleados)
+            $allData = DataTables::of($productos)
             ->addIndexColumn()
-            // trae los datos de una relacion
-            ->editColumn('area_id', function($row) {
-                $area = $row->area_id;
-                foreach (Areas::get() as $value) {
-                    if($row->area_id == $value->id ){
-                        $area = $value->nombre;
-                    }
-                }
-                return $area;
-            })
             ->addColumn('modificar',function($row){
                 $btn = '<a href"javascript:void(0)" data-toggle="tooltip" data-id="'.$row->id.'" data-original-title="Editar" class="edit editEmpleado btn btn-primary btn-sm" style="text-align: center;width: 50px; margin:0 auto; cursor:pointer; display: block;"><i class="far fa-edit"></i></a>';
                 return $btn;
@@ -60,15 +47,7 @@ class EmpleadoController extends Controller
             return $allData;
         }
 
-        return view(
-            'admin.empleados',
-            compact(
-                'empleados',
-                'roles',
-                'areas',
-                'areasAll'
-            )
-        );
+        return view('admin.productos',compact('productos'));
     }
 
     /**
