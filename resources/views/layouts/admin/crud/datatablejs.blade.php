@@ -11,8 +11,6 @@
             });
             var tablaEmpleados = jQuery('.empleados-table')
             var tablaProductos = jQuery('.productos-table')
-            console.log(tablaEmpleados.length)
-            console.log(tablaProductos.length)
             if(tablaEmpleados.length){
                 var table = jQuery('.empleados-table').DataTable({
                     serveside:true,
